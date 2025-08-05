@@ -56,11 +56,7 @@ export default function FeatureCard() {
         </div>
       </div>
 
-      <div className="mt-10">
-        <h1 className="text-2xl font-bold">
-          Here is your HR Point of Contact
-        </h1>
-      </div>
+     
     </div>
   );
 }
