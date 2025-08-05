@@ -15,7 +15,7 @@ export default function PostCard() {
         />
         <div className="absolute top-2 right-2 r flex gap-1 bg-white px-2 py-1 rounded-md">
            
-            <p className="font-bold"><i class="fa fa-star text-purple-600" aria-hidden="true"></i>4.8</p>
+            <p className="font-bold"><i className="fa fa-star text-purple-600" aria-hidden="true"></i>4.8</p>
             <p className="text-gray-500"> 50k reviews</p>
         </div>
       </div>
@@ -33,7 +33,7 @@ export default function PostCard() {
         Data breaches can have serious repercussions for an organization, including expensive ...
     </p>
     <p className=" text-[12px] text-gray-500 ">
-      <i class="fa fa-clock" aria-hidden="true"></i>  15 minutes
+      <i className="fa fa-clock" aria-hidden="true"></i>  15 minutes
     </p>
 </div>
 </CardContent>
