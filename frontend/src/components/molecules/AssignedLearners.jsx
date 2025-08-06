@@ -12,8 +12,8 @@ export default function AssignedLearners() {
   }, []);
 
   return (
-    <div className="mx-auto w-full max-w-[1231px] py-6 px-4">
-      <div className="border rounded-2xl bg-neutral-50 border-gray-300 p-4 sm:p-6">
+    <div className="mx-auto w-full max-w-[1231px] mt-10 px-4">
+      <div className="border rounded-2xl  p-4 sm:p-6">
         
         {/* Header Section */}
         <div className="flex flex-col sm:flex-row justify-between gap-3 sm:gap-0">

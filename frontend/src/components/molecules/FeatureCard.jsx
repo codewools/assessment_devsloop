@@ -11,10 +11,10 @@ import HRContact from "./FeatureContactCard";
 
 export default function FeatureCard() {
   return (
-    <div className="mx-auto w-full max-w-[1231px] py-10 px-4">
+    <div className="mx-auto w-full max-w-[1231px] mt-8 mb-5 px-4">
       <div className="flex flex-col lg:flex-row gap-6 lg:h-[447px]">
         {/* Left Section */}
-        <div className="flex flex-col sm:flex-row justify-around border rounded-2xl bg-neutral-50 w-full lg:w-[820px] border-gray-300 p-6">
+        <div className="flex flex-col sm:flex-row  border rounded-2xl  w-full lg:w-[820px] bg-[#FFFFFF] border-[#E0E0E0] p-6 md:pr-15 pr-5 ">
           <div className="flex flex-col justify-center max-w-md mb-4 sm:mb-0">
             <h2 className="text-2xl font-bold lg:w-[70%] mt-4 mb-4 leading-snug">
               Launch your short Phishing Awareness Training course.
@@ -30,12 +30,13 @@ export default function FeatureCard() {
         </div>
 
         {/* Right Section */}
-        <div className="border rounded-2xl w-full lg:w-[380px] border-gray-300 flex flex-col items-center justify-center p-4 bg-white shadow-sm">
+        <div className="border bg-[#FFFFFF] border-[#E0E0E0] rounded-2xl w-full lg:w-[380px]  flex flex-col items-center justify-center p-4 ">
           <h2 className="text-xl font-semibold mb-4 text-center">
             Here is your HR Point of Contact
           </h2>
 
-                    <Accordion type="single" collapsible className="w-full sm:w-2/3">
+                  <Accordion type="single" collapsible className="w-full md:p-5 p-0 space-y-2">
+
             <HRContact
               value="item-1"
               title="Contact Details"
@@ -52,6 +53,7 @@ export default function FeatureCard() {
               phone="(987) 654-3210"
               availability="Mon-Fri, 8:00 AM - 4:00 PM"
             />
+            
           </Accordion>
         </div>
       </div>

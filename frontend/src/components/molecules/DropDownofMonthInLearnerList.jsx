@@ -3,10 +3,10 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 
 export default function DropDownofMonthInLearnerList({ onSelect }) {
   const [selectedMonth, setSelectedMonth] = useState("1 Month");
@@ -26,8 +26,9 @@ export default function DropDownofMonthInLearnerList({ onSelect }) {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className="px-4 py-2 md:w-[200px] w-full bg-neutral-300 text-gray-700 font-bold rounded-md hover:bg-purple-700 hover:text-white ">
+      <DropdownMenuTrigger className="px-4 py-2 md:w-[200px] w-full flex items-center justify-between text-[#6F6F6F] font-bold rounded-md hover:bg-purple-700 bg-[#F5F5F5] hover:text-white">
         {selectedMonth}
+        <FontAwesomeIcon icon={faChevronDown} className="ml-2" />
       </DropdownMenuTrigger>
 
       <DropdownMenuContent className="w-[200px]">

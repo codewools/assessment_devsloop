@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState ,useEffect, useCallback } from 'react';
 import { Button } from '@/components/ui/button';
 import Stepper from '@/components/atoms/Stepper';
 import LearnersList from '@/components/molecules/LearnersList';
@@ -13,17 +13,34 @@ export default function AssignJourneyDialog() {
   const [selected, setSelected] = useState([]);
   const [currentStep, setCurrentStep] = useState(1);
   const [showSuccess, setShowSuccess] = useState(false);
+const [autoOpenDropdown, setAutoOpenDropdown] = useState(false);
 
+  // ✅ Disable scroll when modal is open
+  useEffect(() => {
+    if (open) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+
+    // Cleanup on unmount
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [open]);
   /**      Memoized: Handle selecting a learner */
-  const handleSelect = useCallback((user) => {
-    setSelected((prevSelected) => {
-      if (!prevSelected.find((item) => item.id === user.id)) {
-        return [...prevSelected, user];
-      }
-      toast.warning('Already selected');
-      return prevSelected;
-    });
-  }, []);
+const handleSelect = useCallback((user) => {
+  setSelected((prevSelected) => {
+    const alreadySelected = prevSelected.some((item) => item.id === user.id);
+
+    if (!alreadySelected) {
+      return [...prevSelected, user];
+    }
+
+    return prevSelected;
+  });
+}, []);
+
 
   /**      Memoized: Remove learner tag */
   const handleRemove = useCallback((id) => {
@@ -62,9 +79,9 @@ export default function AssignJourneyDialog() {
       {/* Open Modal Button */}
       <Button
         onClick={() => setOpen(true)}
-        className="bg-purple-600 px-6 py-2 hover:bg-purple-700 text-white text-sm md:text-base"
+        className="bg-purple-600 pl-[24px] pr-[24px] pt-[8px] pb-[8px] hover:bg-purple-700 text-white text-sm md:text-[16px] font-bold"
       >
-        Assign Journey
+        Assign Learners
       </Button>
 
       {open && (
@@ -73,7 +90,7 @@ export default function AssignJourneyDialog() {
           <div className="absolute inset-0 bg-black/50" onClick={closeModal}></div>
 
           {/* Modal Box */}
-          <div className="relative z-50 w-full max-w-lg min-h-[400px] md:min-h-[454px] bg-white rounded-lg shadow-lg p-4 sm:p-6">
+          <div className="relative z-50 max-w-lg w-[578px] bg-white rounded-lg shadow-lg p-4 sm:p-6">
             <h2
               className="text-lg md:text-2xl text-center font-light mb-4"
               style={{ fontFamily: 'Recoleta' }}
@@ -85,15 +102,15 @@ export default function AssignJourneyDialog() {
 
             {/*      Step 1 */}
             {currentStep === 1 && (
-              <div className="relative h-64 rounded-lg p-2 sm:p-4">
-                <div className="absolute inset-0 z-10 flex w-[90%] items-center mx-auto">
+              <div className="relative h-50 rounded-lg p-2 sm:p-4">
+                <div className="absolute inset-0 z-10 flex w-[90%] mt-10 items-center mx-auto">
                   <p className="text-xs sm:text-sm font-normal text-gray-400 mt-4">
                     Assigning courses will use up one seat depending on your subscription plan.
                     Unassigning before the course starts refunds the seat. Language selection is offered
                     at the start of the course.
                   </p>
                 </div>
-                <div className="absolute top-4 left-4 right-4 z-20 bg-white rounded-md">
+                <div className="absolute top-4 left-4 right-4 z-51 bg-white rounded-md">
                   <LearnersList onSelect={handleSelect} onRemove={handleRemove} />
                 </div>
               </div>
@@ -101,7 +118,7 @@ export default function AssignJourneyDialog() {
 
             {/*      Step 2 */}
             {currentStep === 2 && (
-              <div className="py-12 sm:py-20 relative">
+              <div className="py-12 sm:py-10 relative">
                 {/* Back Button */}
                 <div className="absolute left-0 top-[-60px] sm:top-[-70px] py-2">
                   <i
@@ -127,14 +144,14 @@ export default function AssignJourneyDialog() {
 
                 <div className="border-b mx-auto w-[90%] p-2"></div>
                 <p className="md:text-end text-start px-4 text-xs md:text-sm mt-2 font-bold">
-                  {selected.length} training {selected.length === 1 ? "is" : "are"} going to be assigned
+                  20 are training going to be assigned
                 </p>
               </div>
             )}
 
             {/* Close Button */}
             <button
-              className="absolute top-1 right-1 text-gray-700 md:text-white hover:text-red-500"
+              className="absolute top-1 right-1 md:top-[-25px] md:right-[-25px] text-gray-700 md:text-white hover:text-red-500"
               onClick={closeModal}
             >
               <FontAwesomeIcon icon={faTimes} size="lg" />
